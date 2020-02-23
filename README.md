@@ -35,3 +35,37 @@
 	3. Subscription - Real time connection via web socket
 * Resolvers contain server side logic, simillar to controllers in REST world
 * 
+```
+app.use('/graphql', expressGraphql({
+    schema: points at a valid graphql schema,
+    rootValue: points at a js function which has all resolvers in it,
+}))
+```
+* [String!] - array of string with not nullable values (cannot have null or undefined)
+* rootValue is a bundle of all resolvers
+* use cntrl + space for graphiql autocompletion
+
+---
+### Project Steps 
+
+1. npm init
+1. npm i express body-parser, npm i --save-dev nodemon
+1. add script in package.json to use nodemon
+1. npm i graphql express-graphql
+
+---
+### Graphiql Queries
+
+1. Get list of all events
+```
+query GetEvents{
+  events
+}
+```
+2. Access Mutations
+```
+mutation {
+  createEvent(name: "Dance")
+}
+```
+
