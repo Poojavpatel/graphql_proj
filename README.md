@@ -44,10 +44,46 @@ app.use('/graphql', expressGraphql({
 * [String!] - array of string with not nullable values (cannot have null or undefined)
 * rootValue is a bundle of all resolvers
 * use cntrl + space for graphiql autocompletion
+* creating a custom type event, a type like string Int etc   
+	```
+  type Event {
+		_id: ID!
+		name: String
+		description: String
+		price: Float
+		date: String
+	}
+  ```
+* creating a special type "input" which holds a list of arguments   
+  ```
+  input EventInput{
+    name: String
+    description: String
+    price: Float
+    date: String
+  }
+  ```
+* creating a new event using the mutation
+  ```
+  mutation{
+    createEvent(eventInput:{
+      name:"Birthday",
+      description:"birthday party",
+      price:500.5
+    }) {
+      name
+      description
+      price
+      date
+    }
+  }
+  ```
+
 
 ---
 ### Project Steps 
 
+* To run project - `npm start`
 1. npm init
 1. npm i express body-parser, npm i --save-dev nodemon
 1. add script in package.json to use nodemon
