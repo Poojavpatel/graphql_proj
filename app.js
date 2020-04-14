@@ -44,18 +44,16 @@ app.use('/graphql', expressGraphql({
   `),
   rootValue: {
     events: () => {
-      return events;
+      return Event.find();
     },
-    createEvent: async (args) => {
+    createEvent: (args) => {
       const event = new Event({
-          name: args.eventInput.name,
-          description: args.eventInput.description,
-          price: args.eventInput.price,
-          date: new Date(),
-      })
-      const eventObj = await event.save();
-      console.log('----eventObj----', eventObj);
-      return eventObj;
+        name: args.eventInput.name,
+        description: args.eventInput.description,
+        price: args.eventInput.price,
+        date: new Date(),
+      });
+      return event.save();
     }
   },
   graphiql: true,

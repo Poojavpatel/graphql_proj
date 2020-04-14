@@ -127,3 +127,10 @@ nodemon.json
 * mongoose.Schema is a constructor function to generate new schema objects
 * create models using mongoose.model()
 * an object based on a mongoose model has a method of save(), save writes and updates the object in database.
+* mongoose return data with some meta data, to get only the data part of event use spread operator as `{ ...event._doc }`
+
+
+### Issues and their fixes
+* mongoose "Event is not a constructor" - 
+    use module.exports and not module.export
+
