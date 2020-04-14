@@ -1,3 +1,12 @@
+### Project Steps 
+
+* To run project - `npm start`  or  `nodemon app.js`
+1. npm init
+1. npm i express body-parser path, npm i --save-dev nodemon
+1. add script in package.json to use nodemon
+1. npm i graphql express-graphql
+
+---
 # GraphQl vs REST
 
 ### Advantages of Graphql over Rest
@@ -13,7 +22,7 @@
 
 ---
 ### Working with graphql
-* In Graphql you  ALWAYS sends POST request to a sinle api endpoint (typically /graphql )
+* In Graphql you  ALWAYS sends POST request to a single api endpoint (typically /graphql )
 * Post request contains Query expressions to define data that should be returned
 * a graphql query looks like
 	``` 
@@ -81,15 +90,6 @@ app.use('/graphql', expressGraphql({
 
 
 ---
-### Project Steps 
-
-* To run project - `npm start`
-1. npm init
-1. npm i express body-parser, npm i --save-dev nodemon
-1. add script in package.json to use nodemon
-1. npm i graphql express-graphql
-
----
 ### Graphiql Queries
 
 1. Get list of all events
@@ -105,3 +105,25 @@ mutation {
 }
 ```
 
+---
+### Connecting to mongodb using mongoose
+1. Create a cluster on mongodb atlas and add a user with read write permission
+2. Note and save connection uri and connect using mongo compass to visualise the db collections
+3. install mongoose - `npm i mongoose`
+4. use nodemon.json to provide local env variables   
+nodemon.json   
+`
+{
+  "env":{
+    "MONGO_ADMIN_USERNAME" : "user_one",
+    "MONGO_ADMIN_PASSWORD" : "password1",
+    "MONGO_ADMIN_URI" : "mongodb+srv://user_one:password1@cluster0-gwbeg.mongodb.net/test?retryWrites=true&w=majority",
+  }
+}
+`
+
+---
+### Node
+* mongoose.Schema is a constructor function to generate new schema objects
+* create models using mongoose.model()
+* an object based on a mongoose model has a method of save(), save writes and updates the object in database.
