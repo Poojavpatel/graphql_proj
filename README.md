@@ -98,10 +98,36 @@ query GetEvents{
   events
 }
 ```
-2. Access Mutations
+2. Mutation to add event
 ```
-mutation {
-  createEvent(name: "Dance")
+mutation{
+    createEvent(eventInput:{
+      name:"Birthday",
+      description:"birthday party",
+      price:500.5
+    }) {
+      name
+      description
+      price
+      date
+    }
+  }
+```
+3. Mutation to add user
+```
+mutation{
+  createUser(userInput:{
+    name:"swati",
+    mobile:"9876543210",
+    email:"swati.modi@gmail.com",
+    password: "swatiPassword"
+  }){
+    _id
+    name
+    mobile
+    email
+    password
+  }
 }
 ```
 
@@ -128,7 +154,8 @@ nodemon.json
 * create models using mongoose.model()
 * an object based on a mongoose model has a method of save(), save writes and updates the object in database.
 * mongoose return data with some meta data, to get only the data part of event use spread operator as `{ ...event._doc }`
-
+* 'ref' field in schema of a model, lets mongoose know two fields are internally related 
+* use bcrypt to hash passwords
 
 ### Issues and their fixes
 * mongoose "Event is not a constructor" - 
