@@ -156,6 +156,7 @@ nodemon.json
 * mongoose return data with some meta data, to get only the data part of event use spread operator as `{ ...event._doc }`
 * 'ref' field in schema of a model, lets mongoose know two fields are internally related 
 * use bcrypt to hash passwords
+* Method populate() is a feature provided by mongoose, that populates any relations it knows
 
 ### Issues and their fixes
 * mongoose "Event is not a constructor" - 
