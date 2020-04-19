@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const expressGraphql = require('express-graphql');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 
 const graplQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');

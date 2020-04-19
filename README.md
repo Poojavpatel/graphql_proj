@@ -130,6 +130,38 @@ mutation{
   }
 }
 ```
+4. Mutation to create Booking
+```
+mutation{
+  bookEvent(eventId : "5e9ac271f5d9930579c38360"){
+    _id
+    event{
+      _id
+      name
+      description
+      price
+      date
+    }
+    user{
+      _id
+      name
+      mobile
+      email
+    }
+    createdAt
+    updatedAt
+  }
+}
+```
+5. Mutation to cancel booking
+```
+mutation{
+  cancelBooking(bookingId:"5e9bf9a0a8352405ae642f05"){
+    name
+    price
+  }
+}
+```
 
 ---
 ### Connecting to mongodb using mongoose
@@ -157,6 +189,7 @@ nodemon.json
 * 'ref' field in schema of a model, lets mongoose know two fields are internally related 
 * use bcrypt to hash passwords
 * Method populate() is a feature provided by mongoose, that populates any relations it knows
+* Adding `{ timestamps: true }` option to mongoose schema, recordes createdOn and updatedOn properties to the model
 
 ### Issues and their fixes
 * mongoose "Event is not a constructor" - 
