@@ -7,15 +7,15 @@
 1. npm i graphql express-graphql
 
 ---
-# GraphQl vs REST
+### GraphQl vs REST
 
-### Advantages of Graphql over Rest
+#### Advantages of Graphql over Rest
 * No over or under fetching
 * Dont have to version an api
 * Its a type system hence catches silly errors
 * self documentation, tooling
 
-### Disadvantages
+#### Disadvantages
 * More complex to fetch efficiently (might have to use dataloader, hasura, prisma)
 * Harder to cache and rate limit
 * request monitoring
@@ -72,22 +72,6 @@ app.use('/graphql', expressGraphql({
     date: String
   }
   ```
-* creating a new event using the mutation
-  ```
-  mutation{
-    createEvent(eventInput:{
-      name:"Birthday",
-      description:"birthday party",
-      price:500.5
-    }) {
-      name
-      description
-      price
-      date
-    }
-  }
-  ```
-
 
 ---
 ### Graphiql Queries
@@ -162,8 +146,28 @@ mutation{
   }
 }
 ```
+6. Query to login 
+```
+query{
+  login(email:"jay@gmail.com", password:"jay123"){
+    userId
+    token
+  }
+}
+```
 
 ---
+### Postman Queries
+* All Requests will be POST to 'http://localhost:3000/graphql'
+* Add to header    
+key - 'Authorization'    
+value - 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI1ZTljNzNlOWZiMWNjMjE0ZjYyNzI4NDIiLCJlbWFpbCI6ImpheUBnbWFpbC5jb20iLCJpYXQiOjE1ODczMTQzODcsImV4cCI6MTU4NzMzMjM4N30.XynZVPuTWxwQMW8vNvb5M9rbXNkQAciQSMB4lyiXtlY'
+1. Get list of all events
+```
+{
+	"query":"query { events { name } }"
+}
+```
 ### Connecting to mongodb using mongoose
 1. Create a cluster on mongodb atlas and add a user with read write permission
 2. Note and save connection uri and connect using mongo compass to visualise the db collections
@@ -191,6 +195,20 @@ nodemon.json
 * Method populate() is a feature provided by mongoose, that populates any relations it knows
 * Adding `{ timestamps: true }` option to mongoose schema, recordes createdOn and updatedOn properties to the model
 
+---
+### Json Web Tokens
+* `npm i jsonwebtoken`
+* Used for authentication in applications which have decoupled Frontend and Backend
+* We cannot use a session in decouled application as server doesnt care about the client
+* A json web token is passed to the client, which client stores and attaches to subsequent request, and the token can be verified at the server
+* sign() is a method on jwt to generate token, the first argument is an object of values we want to save in the token and second is a secret key to hash the token
+* In a new auth middleware just set some meta data in headers but do not throw any error, as in graphQl we have a single end point '/graphql'
+* In REST we add middlewares to seperate routes, but in graphQl the middleware applies to all as we have a single route
+
+* In graphql queries or mutations args will always be the first object and req second   
+`bookings(req)` - This is not as valid req should always be second argument
+
+---
 ### Issues and their fixes
 * mongoose "Event is not a constructor" - 
     use module.exports and not module.export
