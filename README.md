@@ -212,4 +212,17 @@ nodemon.json
 ### Issues and their fixes
 * mongoose "Event is not a constructor" - 
     use module.exports and not module.export
+---
 
+## Adding React Frontend
+
+```
+mkdir client || cd client
+npx create-react-app .
+```
+
+To start react app
+`npm start`
+
+To add react-router
+`npm i react-router-dom`

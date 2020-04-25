@@ -1,4 +1,6 @@
 const Booking = require('../../models/booking');
+const Event = require('../../models/event');
+const User = require('../../models/user');
 
 module.exports = {
   bookings: async (args, req) => {
@@ -13,7 +15,7 @@ module.exports = {
       throw new Error('Unauthenticated');
     }
     const event = await Event.findOne({_id:args.eventId});
-    const user = await User.findOne({_id:'5e972de5f0b43022cf1896b9'});
+    const user = await User.findOne({_id:req.userId});
     const booking = new Booking({
       event:event,
       user:user,
