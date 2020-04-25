@@ -216,13 +216,40 @@ nodemon.json
 
 ## Adding React Frontend
 
-```
-mkdir client || cd client
-npx create-react-app .
-```
+  ```
+  mkdir client || cd client
+  npx create-react-app .
+  ```
 
 To start react app
 `npm start`
 
 To add react-router
 `npm i react-router-dom`
+
+### React Routing
+* To Redirect from a path to a component
+* adding switch to redirect means only the first of matching alternatives will be used
+* using switch it will instantly redirect and not evaluate other routes
+  ```
+  <Redirect from="/" to="/login"/>
+  <Route path="/login" component={LoginPage}/>
+  ```
+* exact word specifies redirect if path is exactlt '/'
+
+### React
+* For components that require state and logic use class based components
+```
+import React,{Component} from 'react';
+
+class EventsPage extends Component{
+  render(){
+    return(
+      <h1>Events Page</h1>
+    )
+  }
+}
+export default EventsPage;
+```
+
+* For components which are mostly design realted use functional componets 
