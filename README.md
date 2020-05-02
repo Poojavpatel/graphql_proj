@@ -227,16 +227,7 @@ To start react app
 To add react-router
 `npm i react-router-dom`
 
-### React Routing
-* To Redirect from a path to a component
-* adding switch to redirect means only the first of matching alternatives will be used
-* using switch it will instantly redirect and not evaluate other routes
-  ```
-  <Redirect from="/" to="/login"/>
-  <Route path="/login" component={LoginPage}/>
-  ```
-* exact word specifies redirect if path is exactlt '/'
-
+---
 ### React
 * For components that require state and logic use class based components
 ```
@@ -253,3 +244,46 @@ export default EventsPage;
 ```
 
 * For components which are mostly design realted use functional componets 
+* in functional components we get props
+```
+import React from 'react';
+
+const navigation = props => (
+  <div>
+    <h1>The Navbar</h1>
+  </div>
+);
+
+export default navigation;
+```
+* <React.Fragment> is just a wrapper component like div 
+* Sadly styling in react is written in a different file and is global so classNames are to be prefixed properly   
+ps - switch to vue
+
+* To get form data entered we can use two approches
+  1. Two way data binding   
+  start managing state and add binding to input fields
+  1. Use References   
+  ```
+  constructor(props){
+    super(props);
+    this.emailEl = React.createRef();
+    this.passwordEl = React.createRef();
+  }
+
+  <input type="email" id="email" placeholder="Email" ref={this.emailEl}></input>
+  <input type="password" id="password" placeholder="Password" ref={this.passwordEl}></input>
+  ```
+
+---
+
+### React Routing
+* To Redirect from a path to a component
+* adding switch to redirect means only the first of matching alternatives will be used
+* using switch it will instantly redirect and not evaluate other routes
+  ```
+  <Redirect from="/" to="/login"/>
+  <Route path="/login" component={LoginPage}/>
+  ```
+* exact word specifies redirect if path is exactly '/'
+* use NavLink and not 'anchor' tag as 'anchor' tag reloads the page which we do not want for a spa
