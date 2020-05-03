@@ -72,6 +72,11 @@ app.use('/graphql', expressGraphql({
     date: String
   }
   ```
+* **OPTIONS method**   
+Just like there are GET, POST, PUT, DELETE methods, there is a method OPTIONS   
+A browser automatically sends an OPTIONS req before it sends a post request   
+It is the default behaviour of the browser, to check if the POST request we are about to send is allowed by the browser
+
 
 ---
 ### Graphiql Queries
@@ -274,6 +279,41 @@ ps - switch to vue
   <input type="email" id="email" placeholder="Email" ref={this.emailEl}></input>
   <input type="password" id="password" placeholder="Password" ref={this.passwordEl}></input>
   ```
+* We can pass data from one route to the mainNavigation using 'context api'   
+  context is like a storage we can set up in react app which can be accesed from anywhere in the context tree
+  ```
+  import React from 'react';
+
+  export default React.createContext({
+    token:null,
+    userId:null,
+    login: () => {},
+    logout: () => {}
+  });
+  ```
+  wrap everything around that has access to this context
+  ```
+  <BrowserRouter>
+    <LoginContext.Provider>
+      <MainNavigation/>
+    </LoginContext.Provider>
+  </BrowserRouter>
+  ```
+  To use this context in a component
+  ```
+  import LoginContext from './../context/login-context';
+  class LoginPage extends Component{
+    static contextType = LoginContext;
+  }
+
+  // now this.context can be accesed anywhere in this component
+  ```
+
+  * Provider has a property value which sets value of current context that is passed down to all children
+    ```
+    <LoginContext.Provider value={}>
+    ```
+   
 
 ---
 

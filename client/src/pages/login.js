@@ -1,6 +1,13 @@
 import React,{Component} from 'react';
+import LoginContext from '../context/login-context';
 
 class LoginPage extends Component{
+  state = {
+    isLogin: true
+  }
+
+  static contextType = LoginContext;
+
   constructor(props){
     super(props);
     this.emailEl = React.createRef();
@@ -8,34 +15,45 @@ class LoginPage extends Component{
   }
 
   // submitHandler is a method to handle submitting email and password to api
-  submitHandler = (event) => {
+  submitHandler = async (event) => {
     event.preventDefault();
-    // console.log('---this.emailEl---', this.emailEl);
     const email = this.emailEl.current.value;
     const password = this.passwordEl.current.value;
     const data = {
       query : `
-      mutation{
-        createUser(userInput:{
-          email:${email},
-          password:${password}"
-        }){
-          _id
-          name
-          mobile
-          email
+        query{
+          login(email:"${email}", password:"${password}"){
+            userId
+            token
+          }
         }
-      }
       `
     }
 
-    fetch('http://localhost:5000/graphql', {
+    const response = await fetch('http://localhost:5000/graphql', {
       method:'POST',
       body:JSON.stringify(data),
       headers:{
         'Content-Type' : 'application/json'
       }
     });
+    if(!(response.status === 200 || response.status === 201)){
+      console.log('Failed!')
+      return false;
+    }
+    const responseData = await response.json();
+    if(responseData.data && responseData.data.login.token){
+      this.context.login(
+        responseData.data.login.token,
+        responseData.data.login.userId
+      );
+    }
+  }
+
+  showSwitchHandler = () => {
+    this.setState(prevState => {
+      return {isLogin : !prevState.isLogin};
+    })
   }
 
   render(){
@@ -45,7 +63,7 @@ class LoginPage extends Component{
         <form onSubmit={this.submitHandler}>
           <input type="email" id="email" placeholder="Email" ref={this.emailEl}></input>
           <input type="password" id="password" placeholder="Password" ref={this.passwordEl}></input>
-          <button>Switch to Signup</button>
+          <button onClick={this.showSwitchHandler}>Switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
           <button type="submit">Submit</button>
         </form>
         </React.Fragment>

@@ -10,6 +10,17 @@ const isAuth = require('./middleware/auth');
 const app = express();
 app.use(bodyParser.json());
 
+// set headers to allow cors
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST,GET,OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if(req.method === 'OPTIONS'){
+    return res.sendStatus(200);
+  }
+  next();
+});
+
 // using middleware for authentication
 app.use(isAuth);
 

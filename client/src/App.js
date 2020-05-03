@@ -1,25 +1,48 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './App.css';
 import {BrowserRouter, Route, Redirect, Switch} from 'react-router-dom';
 import LoginPage from './pages/login';
 import EventsPage from './pages/events';
 import BookingsPage from './pages/bookings';
 import MainNavigation from './components/Navbar/MainNavigation';
+import LoginContext from './context/login-context';
 
-function App() {
-  return (
-    <BrowserRouter>
-      <MainNavigation/>
-      <div>
-        <Switch>
-            <Redirect from="/" to="/login" exact/>
-            <Route path="/login" component={LoginPage}/>
-            <Route path="/events" component={EventsPage}/>
-            <Route path="/bookings" component={BookingsPage}/>
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+class App extends Component {
+  state = {
+    token:null,
+    userId:null
+  }
+
+  login = (token, userId) => {
+    this.setState({ token:token, userId:userId });
+  }
+
+  logout = () => {}
+
+  render(){
+    return (
+      <BrowserRouter>
+        <LoginContext.Provider
+          value={{
+            token:this.state.token,
+            userId:this.state.userId,
+            login:this.login,
+            logout:this.logout
+          }}
+        >
+          <MainNavigation/>
+          <div>
+            <Switch>
+                <Redirect from="/" to="/login" exact/>
+                <Route path="/login" component={LoginPage}/>
+                <Route path="/events" component={EventsPage}/>
+                <Route path="/bookings" component={BookingsPage}/>
+            </Switch>
+          </div>
+        </LoginContext.Provider>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
