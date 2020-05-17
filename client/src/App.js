@@ -17,7 +17,9 @@ class App extends Component {
     this.setState({ token:token, userId:userId });
   }
 
-  logout = () => {}
+  logout = () => {
+    this.setState({ token:null, userId:null });
+  }
 
   render(){
     return (
@@ -33,12 +35,12 @@ class App extends Component {
           <MainNavigation/>
           <div>
             <Switch>
-              {!this.state.token && <Redirect from="/" to="/login" exact/>}
               {this.state.token && <Redirect from="/" to="/events" exact/>}
               {this.state.token && <Redirect from="/login" to="/events" exact/>}
               {!this.state.token && <Route path="/login" component={LoginPage}/>}
               <Route path="/events" component={EventsPage}/>
               {this.state.token && <Route path="/bookings" component={BookingsPage}/>}
+              {!this.state.token && <Redirect to="/login" exact/>}
             </Switch>
           </div>
         </LoginContext.Provider>

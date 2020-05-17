@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import LoginContext from '../context/login-context';
+import './login.css';
 
 class LoginPage extends Component{
   state = {
