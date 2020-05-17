@@ -3,7 +3,9 @@ import React,{Component} from 'react';
 class BookingsPage extends Component{
   render(){
     return(
-      <h1>Bookings Page</h1>
+      <div className="margin-me">
+        <h1>Bookings Page</h1>
+      </div>
     )
   }
 }

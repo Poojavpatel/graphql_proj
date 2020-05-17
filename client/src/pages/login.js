@@ -59,7 +59,7 @@ class LoginPage extends Component{
 
   render(){
     return(
-      <React.Fragment>
+      <div className="margin-me">
         <h1>Login Page</h1>
         <form onSubmit={this.submitHandler}>
           <input type="email" id="email" placeholder="Email" ref={this.emailEl}></input>
@@ -67,7 +67,7 @@ class LoginPage extends Component{
           <button onClick={this.showSwitchHandler}>Switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
           <button type="submit">Submit</button>
         </form>
-        </React.Fragment>
+        </div>
     )
   }
 }

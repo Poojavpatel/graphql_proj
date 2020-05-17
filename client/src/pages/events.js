@@ -33,8 +33,10 @@ class EventsPage extends Component{
           canConfirm>
           <p>Modal Content</p>
         </Modal>}
-        <h1>Events Page</h1>
-        <button onClick={this.createEventHandler}>Create Event</button>
+        <div className="margin-me">
+          <h1>Events Page</h1>
+          <button onClick={this.createEventHandler}>Create Event</button>
+        </div>
       </React.Fragment>
     )
   }
