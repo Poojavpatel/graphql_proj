@@ -33,10 +33,12 @@ class App extends Component {
           <MainNavigation/>
           <div>
             <Switch>
-                <Redirect from="/" to="/login" exact/>
-                <Route path="/login" component={LoginPage}/>
-                <Route path="/events" component={EventsPage}/>
-                <Route path="/bookings" component={BookingsPage}/>
+              {!this.state.token && <Redirect from="/" to="/login" exact/>}
+              {this.state.token && <Redirect from="/" to="/events" exact/>}
+              {this.state.token && <Redirect from="/login" to="/events" exact/>}
+              {!this.state.token && <Route path="/login" component={LoginPage}/>}
+              <Route path="/events" component={EventsPage}/>
+              {this.state.token && <Route path="/bookings" component={BookingsPage}/>}
             </Switch>
           </div>
         </LoginContext.Provider>
