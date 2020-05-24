@@ -59,15 +59,20 @@ class LoginPage extends Component{
 
   render(){
     return(
-      <div className="margin-me">
-        <h1>Login Page</h1>
-        <form onSubmit={this.submitHandler}>
+      <form className="auth-form" onSubmit={this.submitHandler}>
+        <div className="form-control">
+          <label htmlFor="email">E-Mail</label>
           <input type="email" id="email" placeholder="Email" ref={this.emailEl}></input>
+        </div>
+        <div className="form-control">
+          <label htmlFor="password">Password</label>
           <input type="password" id="password" placeholder="Password" ref={this.passwordEl}></input>
+        </div>
+        <div className="form-actions">
           <button onClick={this.showSwitchHandler}>Switch to {this.state.isLogin ? 'Signup' : 'Login'}</button>
           <button type="submit">Submit</button>
-        </form>
         </div>
+      </form>
     )
   }
 }
